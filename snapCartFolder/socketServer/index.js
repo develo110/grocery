@@ -127,6 +127,7 @@ app.post("/notify", (req, res) => {
 });
 
 // ----------------------------------------------------
-server.listen(4000, () =>
-  console.log("🔥 Socket Server Running on http://localhost:4000")
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, () =>
+  console.log(`🔥 Socket Server Running on port ${PORT}`)
 );

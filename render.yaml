@@ -1,0 +1,52 @@
+services:
+  # Socket Server
+  - type: web
+    name: snapcart-socket-server
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: cd snapCartFolder/socketServer && npm install
+    startCommand: cd snapCartFolder/socketServer && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        sync: false
+      - key: PORT
+        value: 10000
+
+  # Next.js App
+  - type: web
+    name: snapcart-app
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: cd snapCartFolder/snapcart && npm install && npm run build
+    startCommand: cd snapCartFolder/snapcart && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URL
+        sync: false
+      - key: AUTH_SECRET
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: NEXT_PUBLIC_BASE_URL
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: NEXT_PUBLIC_SOCKET_URL
+        sync: false
+      - key: MAIL_PASS
+        sync: false
+      - key: MAIL_USER
+        sync: false
+      - key: NEXT_PUBLIC_GEMINI_API_KEY
+        sync: false
